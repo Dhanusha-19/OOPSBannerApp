@@ -1,18 +1,45 @@
-public class OOPSBanner {
+public class Banner {
 
     public static void main(String[] args) {
 
         String[] banner = {
-
-            String.join("   ", " ***** ", " ***** ", " ***** ", " ***** "),
-            String.join("   ", "*     *", "*     *", "*     *", "*      "),
-            String.join("   ", "*     *", "*     *", " ***** ", " ***** "),
-            String.join("   ", "*     *", "*     *", "*      ", "      *"),
-            String.join("   ", " ***** ", " ***** ", "*      ", " ***** ")
+                buildO(),
+                buildO(),
+                buildP(),
+                buildS()
         };
 
-        for (int i = 0; i < banner.length; i++) {
-            System.out.println(banner[i]);
+        // Print each character pattern
+        for (String letter : banner) {
+            System.out.println(letter);
+            System.out.println(); // space between letters
         }
+    }
+
+    // Method to build letter O
+    public static String buildO() {
+        return  " ***** \n" +
+                "*     *\n" +
+                "*     *\n" +
+                "*     *\n" +
+                " ***** ";
+    }
+
+    // Method to build letter P
+    public static String buildP() {
+        return  " ***** \n" +
+                "*     *\n" +
+                " ***** \n" +
+                "*      \n" +
+                "*      ";
+    }
+
+    // Method to build letter S
+    public static String buildS() {
+        return  " ***** \n" +
+                "*      \n" +
+                " ***** \n" +
+                "      *\n" +
+                " ***** ";
     }
 }
