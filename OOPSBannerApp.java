@@ -1,45 +1,81 @@
-public class Banner {
+import java.util.HashMap;
+import java.util.Map;
 
-    public static void main(String[] args) {
+public class OOPSBannerApp {
 
-        String[] banner = {
-                buildO(),
-                buildO(),
-                buildP(),
-                buildS()
-        };
+    // Static Inner Class to encapsulate Character and Pattern
+    static class CharacterPatternMap {
+        private char character;
+        private String[] pattern;
 
-        // Print each character pattern
-        for (String letter : banner) {
-            System.out.println(letter);
-            System.out.println(); // space between letters
+        public CharacterPatternMap(char character, String[] pattern) {
+            this.character = character;
+            this.pattern = pattern;
+        }
+
+        public char getCharacter() {
+            return character;
+        }
+
+        public String[] getPattern() {
+            return pattern;
         }
     }
 
-    // Method to build letter O
-    public static String buildO() {
-        return  " ***** \n" +
-                "*     *\n" +
-                "*     *\n" +
-                "*     *\n" +
-                " ***** ";
+    // Centralized Character Pattern Storage
+    private static final Map<Character, CharacterPatternMap> patternMap = new HashMap<>();
+
+    // Static Block to initialize patterns
+    static {
+        patternMap.put('O', new CharacterPatternMap('O', new String[]{
+                " ***** ",
+                " ** ** ",
+                "**   **",
+                "**   **",
+                "**   **",
+                " ** ** ",
+                " ***** "
+        }));
+
+        patternMap.put('P', new CharacterPatternMap('P', new String[]{
+                "****** ",
+                "**   **",
+                "**   **",
+                "****** ",
+                "**     ",
+                "**     ",
+                "**     "
+        }));
+
+        patternMap.put('S', new CharacterPatternMap('S', new String[]{
+                " ****** ",
+                "**      ",
+                "**      ",
+                " *****  ",
+                "     ** ",
+                "     ** ",
+                " ****** "
+        }));
     }
 
-    // Method to build letter P
-    public static String buildP() {
-        return  " ***** \n" +
-                "*     *\n" +
-                " ***** \n" +
-                "*      \n" +
-                "*      ";
-    }
+    public static void main(String[] args) {
 
-    // Method to build letter S
-    public static String buildS() {
-        return  " ***** \n" +
-                "*      \n" +
-                " ***** \n" +
-                "      *\n" +
-                " ***** ";
+        String word = "OOPS";
+
+        int height = 7; // All characters are 7 lines tall
+
+        for (int i = 0; i < height; i++) {
+
+            StringBuilder line = new StringBuilder();
+
+            for (char ch : word.toCharArray()) {
+                CharacterPatternMap cp = patternMap.get(ch);
+                if (cp != null) {
+                    line.append(cp.getPattern()[i]).append("  ");
+                }
+            }
+
+            System.out.println(line);
+        }
     }
 }
