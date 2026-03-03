@@ -1,29 +1,15 @@
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
+
 public class OOPSBannerApp {
 
-    static class CharacterPatternMap {
-        private char character;
-        private String[] pattern;
+    // Centralized Pattern Storage using HashMap
+    private static final Map<Character, String[]> patternMap = new HashMap<>();
 
-        public CharacterPatternMap(char character, String[] pattern) {
-            this.character = character;
-            this.pattern = pattern;
-        }
+    // Initialize all character patterns
+    private static void initializePatterns() {
 
-        public char getCharacter() {
-            return character;
-        }
-
-        public String[] getPattern() {
-            return pattern;
-        }
-    }
-
-    private static final Map<Character, CharacterPatternMap> patternMap = new HashMap<>();
-
-    static {
-        patternMap.put('O', new CharacterPatternMap('O', new String[]{
+        patternMap.put('O', new String[]{
                 " ***** ",
                 " ** ** ",
                 "**   **",
@@ -31,9 +17,9 @@ public class OOPSBannerApp {
                 "**   **",
                 " ** ** ",
                 " ***** "
-        }));
+        });
 
-        patternMap.put('P', new CharacterPatternMap('P', new String[]{
+        patternMap.put('P', new String[]{
                 "****** ",
                 "**   **",
                 "**   **",
@@ -41,9 +27,9 @@ public class OOPSBannerApp {
                 "**     ",
                 "**     ",
                 "**     "
-        }));
+        });
 
-        patternMap.put('S', new CharacterPatternMap('S', new String[]{
+        patternMap.put('S', new String[]{
                 " ****** ",
                 "**      ",
                 "**      ",
@@ -51,27 +37,39 @@ public class OOPSBannerApp {
                 "     ** ",
                 "     ** ",
                 " ****** "
-        }));
+        });
     }
 
-    public static void main(String[] args) {
+    // Reusable Banner Rendering Function
+    private static void renderBanner(String word) {
 
-        String word = "OOPS";
+        int height = 7; // Each character is 7 lines tall
 
-        int height = 7;
-
-        for (int i = 0; i < height; i++) {
+        for (int row = 0; row < height; row++) {
 
             StringBuilder line = new StringBuilder();
 
             for (char ch : word.toCharArray()) {
-                CharacterPatternMap cp = patternMap.get(ch);
-                if (cp != null) {
-                    line.append(cp.getPattern()[i]).append("  ");
+
+                String[] pattern = patternMap.get(ch);
+
+                if (pattern != null) {
+                    line.append(pattern[row]).append("  ");
+                } else {
+                    line.append("       "); // Space for unknown characters
                 }
             }
 
             System.out.println(line);
         }
+    }
+
+    public static void main(String[] args) {
+
+        initializePatterns();
+
+        String word = "OOPS";
+
+        renderBanner(word);
     }
 }
