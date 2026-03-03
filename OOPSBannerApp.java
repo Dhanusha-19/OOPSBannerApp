@@ -1,9 +1,7 @@
-import java.util.HashMap;
 import java.util.Map;
-
+import java.util.HashMap;
 public class OOPSBannerApp {
 
-    // Static Inner Class to encapsulate Character and Pattern
     static class CharacterPatternMap {
         private char character;
         private String[] pattern;
@@ -22,10 +20,8 @@ public class OOPSBannerApp {
         }
     }
 
-    // Centralized Character Pattern Storage
     private static final Map<Character, CharacterPatternMap> patternMap = new HashMap<>();
 
-    // Static Block to initialize patterns
     static {
         patternMap.put('O', new CharacterPatternMap('O', new String[]{
                 " ***** ",
@@ -62,7 +58,7 @@ public class OOPSBannerApp {
 
         String word = "OOPS";
 
-        int height = 7; // All characters are 7 lines tall
+        int height = 7;
 
         for (int i = 0; i < height; i++) {
 
